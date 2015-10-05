@@ -1,9 +1,16 @@
 # savemypix.sh
 # Copies a corrupted iPhoto Library's contents to an external disk.
-# Ryan McGinnis (rmcginnis@*****.com)
+# Ryan McGinnis (rmcginnis@apple.com)
+# Apple Store San Francisco (R075)
 
-des=$(df | grep '/Volumes/' | cut -c 82-100) # if only one external disk is mounted, only one disk will be displayed in df
-src=("$HOME/Pictures/iPhoto Library"*"/Masters/") # sometimes the package may be named .photolibrary or .migratedphotolibrary
-bt=$(date "+%m_%d_%Y") # date of backup
-mkdir $des/iPhotoBackup$bt # make a directory for the backup on the external disk 
-sudo rsync -aPv "$src" "$des/iPhotoBackup$bt/"
+bt=$(date "+%m_%d_%Y")
+
+if [ $# -eq 0 ]; then
+	des=$(df -lH | grep "/Volumes/*" | cut -c 69-)
+	src=("$HOME/Pictures/iPhoto Library"*"/Masters/")
+	mkdir $des/iPhotoBackup$bt
+	sudo rsync -aPv "$src" "$des/iPhotoBackup$bt/"
+else	
+	mkdir $2/iPhotoBackup$bt
+	sudo rsync -aPv $1/ $2/iPhotoBackup$bt/
+fi
