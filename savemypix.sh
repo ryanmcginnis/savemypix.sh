@@ -9,12 +9,9 @@ pext='.photoslibrary'
 if [ $# -eq 0 ]; then
 	des=$(df -lh | awk '{print $9}' | tail -n 1)
 	src=("$HOME/Pictures/Photos Library"$pext"/Masters/")
-	if [ ! -f "$HOME/Pictures/Photos Library.photoslibrary" ]; then
+	if [ -f "$HOME/Pictures/Photos Library.photoslibrary" ]; then
 		mkdir $des/PhotosBackup$bt
 		rsync -aPv "$src" "$des/PhotosBackup$bt/"
-	elif [ ! -f "$HOME/Pictures/iPhoto Library.iphotolibrary" ]; then
-		mkdir $des/iPhotoBackup$bt
-		rsync -aPv "$src" "$des/iPhotoBackup$bt/"
 	else
 		echo "No Photos or iPhoto Library, or its filename is not default."
 		exit
