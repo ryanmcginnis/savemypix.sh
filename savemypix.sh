@@ -6,7 +6,7 @@
 bt=$(date "+%m_%d_%Y")
 
 if [ $# -eq 0 ]; then
-	des=$(df -lH | grep "/Volumes/*" | cut -c 69-)
+	des=$(df -lh | awk '{print $9}' | tail -n 1)
 	src=("$HOME/Pictures/iPhoto Library"*"/Masters/")
 	mkdir $des/iPhotoBackup$bt
 	sudo rsync -aPv "$src" "$des/iPhotoBackup$bt/"
