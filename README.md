@@ -1,2 +1,2 @@
 # savemypix.sh
-move data from a .photolibrary package to an external disk
+move data from a .photoslibrary package to an external disk
