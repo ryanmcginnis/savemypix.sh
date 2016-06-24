@@ -4,17 +4,17 @@
 bt=$(date "+%m_%d_%Y")
 pext=".photoslibrary"
 
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ]; then # automatic
 	des=$(df -lh | awk "{print $9}" | tail -n 1)
-	src=("$HOME/Pictures/Photos Library"$pext"/Masters/")
-	if [ -e "$HOME/Pictures/Photos Library.photoslibrary" ]; then
+	src=("$HOME/Pictures/Photos Library"$pext"/Masters/") # default path
+	if [ -e "$HOME/Pictures/Photos Library.photoslibrary" ]; then # checks if file exists
 		mkdir $des/PhotosBackup$bt
 		rsync -aPv "$src" "$des/PhotosBackup$bt/"
 	else
 		echo "No Photos Library, or its filename is not default."
 		exit
 	fi
-else
+else # provide paths at command-line
 	mkdir $2/PhotosBackup$bt
 	rsync -aPv $1/ $2/PhotosBackup$bt/
 fi
