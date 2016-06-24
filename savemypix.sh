@@ -1,7 +1,5 @@
 # savemypix.sh
 # Copies a corrupted iPhoto Library's contents to an external disk.
-# Ryan McGinnis (rmcginnis@apple.com)
-# Apple Store San Francisco (R075)
 
 bt=$(date "+%m_%d_%Y")
 pext='.photoslibrary'
